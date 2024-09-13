@@ -6,6 +6,7 @@ print(data.dtypes)
 data.drop_duplicates(inplace=True)
 print(data.iloc[0])
 print(data.isna().sum())
+
 remote_salaries=data.copy()
 remote_salaries=remote_salaries.groupby('remote_ratio')['salary_in_usd'].mean()
 print(remote_salaries)
@@ -21,7 +22,7 @@ experience_salaries=data.copy().groupby('experience_level'
                                         )['salary_in_usd'].mean()
 
 plt.figure()
-experience_salaries.sort_values().plot(kind='bar')
+experience_salaries.sort_values().plot(kind='bar',rot=45)
 plt.show()
 
 country_salaries=data.copy().groupby(['company_location']
@@ -38,6 +39,7 @@ print(grouped_titles['job_title'].value_counts())
 
 cj=list(grouped_titles['job_title'].value_counts().head(10).index)
 common_jobs=grouped_titles[grouped_titles['job_title'].isin(cj)]
+
 plt.figure()
 common_jobs.groupby('job_title')['salary_in_usd'].mean().plot(kind='bar')
 plt.show()
